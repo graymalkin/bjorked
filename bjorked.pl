@@ -15,17 +15,16 @@ $VERSION = "0.1";
     contact      => "sjc80\@kent.ac.uk",
     name         => "björked",
     license      => "MIT http://opensource.org/licenses/",
-    description  => "Replace borked and broken with derivations of björk"
+    description  => "Replace borked and borken with derivations of björk"
     );
 
 sub message_bjork {
     my ($cmd, $server, $winitem) = @_;
     my ($param, $target,$data) = $cmd =~ /^(-\S*\s)?(\S*)\s(.*)/;
-    if($data =~ m/borked|broken|borken/i) {
-        # Replace all broken and borked with björk equivs. Ignore case.
-        $data =~ s/\bbroken\b/björken/gi;
-        $data =~ s/\bborked\b/björked/gi;
-        $data =~ s/\bborken\b/björken/gi;
+    if($data =~ m/borke[dn]/i) {
+        # Replace all borked and borken with björk equivs.
+        $data =~ s/\b([Bb])o([Rr][Kk][Ee][DdNn])\b/\1jö\2/g;
+        $data =~ s/\b([Bb])O([Rr][Kk][Ee][DdNn])\b/\1JÖ\2/g;
 
         # print "$param$target $data";
         Irssi::signal_emit("command msg", "$param$target $data", $server, $winitem);

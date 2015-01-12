@@ -4,7 +4,7 @@ bjorked.pl
 Description
 -----------
 
-Replace broken and borked with björk themed equivelents.
+Replace borked and borken with björk themed equivelents.
 
 
 Usage
