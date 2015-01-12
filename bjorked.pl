@@ -14,7 +14,7 @@ $VERSION = "0.1";
     authors      => "Simon Cooksey",
     contact      => "sjc80\@kent.ac.uk",
     name         => "björked",
-    license      => "MIT http://opensource.org/licenses/"
+    license      => "MIT http://opensource.org/licenses/",
     description  => "Replace borked and broken with derivations of björk"
     );
 
@@ -24,6 +24,7 @@ sub message_bjork {
     # Replace all broken and borked with björk equivs. Ignore case.
     $cmd =~ s/broken/björken/gi;
     $cmd =~ s/borked/björked/gi;
+    $cmd =~ s/borken/björken/gi;
 
     Irssi::signal_emit("command msg", "$target $_", $server, $winitem);
 }
