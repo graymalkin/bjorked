@@ -23,9 +23,9 @@ sub message_bjork {
     my ($param, $target,$data) = $cmd =~ /^(-\S*\s)?(\S*)\s(.*)/;
     if($data =~ m/borked|broken|borken/i) {
         # Replace all broken and borked with björk equivs. Ignore case.
-        $data =~ s/broken/björken/gi;
-        $data =~ s/borked/björked/gi;
-        $data =~ s/borken/björken/gi;
+        $data =~ s/\bbroken\b/björken/gi;
+        $data =~ s/\bborked\b/björked/gi;
+        $data =~ s/\bborken\b/björken/gi;
 
         # print "$param$target $data";
         Irssi::signal_emit("command msg", "$param$target $data", $server, $winitem);
