@@ -21,7 +21,7 @@ $VERSION = "0.1";
 sub message_bjork {
     my ($cmd, $server, $winitem) = @_;
     my ($param, $target,$data) = $cmd =~ /^(-\S*\s)?(\S*)\s(.*)/;
-    if($data =~ m/borke[dn]/i) {
+    if($data =~ m/\bborke[dn]\b/i) {
         # Replace all borked and borken with björk equivs.
         $data =~ s/\b([Bb])o([Rr][Kk][Ee][DdNn])\b/\1jö\2/g;
         $data =~ s/\b([Bb])O([Rr][Kk][Ee][DdNn])\b/\1JÖ\2/g;
