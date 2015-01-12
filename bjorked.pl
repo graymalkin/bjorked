@@ -21,15 +21,16 @@ $VERSION = "0.1";
 sub message_bjork {
     my ($cmd, $server, $winitem) = @_;
     my ($param, $target,$data) = $cmd =~ /^(-\S*\s)?(\S*)\s(.*)/;
+    if($data =~ m/(borked)|(broken)|(borken)/) {
+	# Replace all broken and borked with björk equivs. Ignore case.
+	$data =~ s/broken/björken/gi;
+	$data =~ s/borked/björked/gi;
+	$data =~ s/borken/björken/gi;
 
-    # Replace all broken and borked with björk equivs. Ignore case.
-    $data =~ s/broken/björken/gi;
-    $data =~ s/borked/björked/gi;
-    $data =~ s/borken/björken/gi;
-
-    # print "$target $_";
-    Irssi::signal_emit("command msg", "$target $data", $server, $winitem);
-    Irssi::signal_stop();
+	# print "$param$target $data";
+	Irssi::signal_emit("command msg", "$param$target $data", $server, $winitem);
+	Irssi::signal_stop();
+    }
 }
 
 Irssi::command_bind('msg', 'message_bjork');
