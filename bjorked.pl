@@ -26,7 +26,7 @@ sub message_bjork {
     $cmd =~ s/borked/björked/gi;
     $cmd =~ s/borken/björken/gi;
 
-    Irssi::signal_emit("command msg", "$target $_", $server, $winitem);
+    Irssi::signal_emit("command msg", "$cmd", $server, $winitem);
 }
 
 Irssi::command_bind('msg', 'message_bjork');
