@@ -21,7 +21,7 @@ $VERSION = "0.1";
 sub message_bjork {
     my ($cmd, $server, $winitem) = @_;
     my ($param, $target,$data) = $cmd =~ /^(-\S*\s)?(\S*)\s(.*)/;
-    if($data =~ m/(borked)|(broken)|(borken)/) {
+    if($data =~ m/borked|broken|borken/i) {
         # Replace all broken and borked with björk equivs. Ignore case.
         $data =~ s/broken/björken/gi;
         $data =~ s/borked/björked/gi;
