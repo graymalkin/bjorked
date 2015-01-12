@@ -21,11 +21,32 @@ $VERSION = "0.1";
 sub message_bjork {
     my ($cmd, $server, $winitem) = @_;
     my ($param, $target,$data) = $cmd =~ /^(-\S*\s)?(\S*)\s(.*)/;
-    if($data =~ m/\bborke[dn]\b/i) {
-        # Replace all borked and borken with björk equivs.
-        $data =~ s/\b([Bb])o([Rr][Kk][Ee][DdNn])\b/\1jö\2/g;
-        $data =~ s/\b([Bb])O([Rr][Kk][Ee][DdNn])\b/\1JÖ\2/g;
 
+    my @subs = (
+        # Match borked type strings
+        [m/\bborke[dn]\b/i, 
+            [s/\b([Bb])o([Rr][Kk][Ee][DdNn])\b/\1jö\2/g,
+             s/\b([Bb])O([Rr][Kk][Ee][DdNn])\b/\1JÖ\2/g ]],
+        # Match broken type strings
+        [m/\bbroke[dn]\b/i],
+            [s/\b([Bb])([Rr])o([Kk][Ee][DdNn])\b/\1jö\2\3/g,
+             s/\b([Bb])([Rr])O([Kk][Ee][DdNn])\b/\1JÖ\2\3/g ]]
+    )
+    my $modified = 0;
+
+    foreach(@subs)              # For each substitution
+    {
+        if($data =~ $_[0])      # Check matches
+        {
+            foreach($_[1])      # For each transformation in substitutions
+            {
+                $data =~ $_;    # Apply
+                $modified = 1;  # Flag chaned
+            }
+        }
+    }
+
+    if($modified) {
         # print "$param$target $data";
         Irssi::signal_emit("command msg", "$param$target $data", $server, $winitem);
         Irssi::signal_stop();
